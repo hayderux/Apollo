@@ -15,5 +15,6 @@ List<Settingslist> settinglist = [
       icon: Icons.settings,
       ontap: () {
         LauncherAssist.launchApp('com.android.settings');
-      })
+      }),
+  Settingslist(title: 'Appreance', icon: Icons.color_lens, ontap: () {})
 ];

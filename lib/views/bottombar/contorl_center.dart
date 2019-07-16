@@ -1,3 +1,5 @@
+import 'package:apollo/style/CustomTheme.dart';
+import 'package:apollo/style/themes.dart';
 import 'package:apollo/style/xd.dart';
 import 'package:apollo/views/settings/settings.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,10 @@ class ControlCenter extends StatefulWidget {
 class _ControlCenterState extends State<ControlCenter> {
   bool _isEnabled = false;
   double _sliderValue;
+  void _changeTheme(BuildContext buildContext, MyThemeKeys key) {
+    CustomTheme.instanceOf(buildContext).changeTheme(key);
+  }
+
   Widget circleicon(
       Color color, IconData icon, Color iconcolor, VoidCallback ontap) {
     return InkWell(
@@ -52,7 +58,8 @@ class _ControlCenterState extends State<ControlCenter> {
   Widget cheackwifi() {
     isEnabled();
     if (_isEnabled != null && _isEnabled) {
-      return circleicon(Color(0xff0063B1), Icons.wifi, Colors.white, () {
+      return circleicon(
+          Theme.of(context).primaryColor, Icons.wifi, Colors.white, () {
         WiFiForIoTPlugin.setEnabled(false);
       });
     }
@@ -113,10 +120,12 @@ class _ControlCenterState extends State<ControlCenter> {
                           });
                     },
                   ),
-                  /*IconButton(
-                    icon: Icon(Icons.power_settings_new),
-                    onPressed: () {},
-                  ),*/
+                  IconButton(
+                    icon: Icon(Icons.color_lens),
+                    onPressed: () {
+                      _changeTheme(context, MyThemeKeys.Theme2);
+                    },
+                  ),
                 ],
               )
             ],

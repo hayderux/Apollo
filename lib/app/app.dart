@@ -1,10 +1,13 @@
+import 'package:apollo/style/CustomTheme.dart';
 import 'package:apollo/views/shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
 }
 
 class _MyAppState extends State<MyApp> {
@@ -23,7 +26,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Apollo',
-      theme: ThemeData(platform: TargetPlatform.iOS),
+      theme: CustomTheme.of(context),
       home: Shell(),
     );
   }
