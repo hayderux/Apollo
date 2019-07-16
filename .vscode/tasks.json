@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build apk",
+            "type": "shell",
+            "command": "flutter build apk",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build appbundle",
+            "type": "shell",
+            "command": "flutter build appbundle --target-platform android-arm,android-arm64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Flutter clean",
+            "type": "shell",
+            "command": "flutter clean",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+    ]
+}

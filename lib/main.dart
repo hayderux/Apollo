@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'app/app.dart';
 
-void main() {
+void main() async {
   _setTargetPlatformForDesktop();
   runApp(MyApp());
 }

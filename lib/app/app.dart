@@ -12,7 +12,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     setState(() {
-      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+      //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
           .copyWith(statusBarColor: Colors.transparent));
     });
