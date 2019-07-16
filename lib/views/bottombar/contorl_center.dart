@@ -2,6 +2,7 @@ import 'package:apollo/style/xd.dart';
 import 'package:apollo/views/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:screen/screen.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 import 'package:flutter/services.dart';
 
@@ -12,9 +13,7 @@ class ControlCenter extends StatefulWidget {
 
 class _ControlCenterState extends State<ControlCenter> {
   bool _isEnabled = false;
-  final double dogAvatarSize = 150.0;
-  // This is the starting value of the slider.
-  double _sliderValue = 10.0;
+  double _sliderValue;
   Widget circleicon(
       Color color, IconData icon, Color iconcolor, VoidCallback ontap) {
     return InkWell(
@@ -59,6 +58,20 @@ class _ControlCenterState extends State<ControlCenter> {
     }
     return circleicon(Colors.white, Icons.wifi, Colors.black, () {
       WiFiForIoTPlugin.setEnabled(true);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getbrightness();
+  }
+
+  getbrightness() async {
+    double brightness = await Screen.brightness;
+
+    setState(() {
+      _sliderValue = brightness;
     });
   }
 
@@ -131,11 +144,11 @@ class _ControlCenterState extends State<ControlCenter> {
               Icon(Icons.volume_up),
               Slider(
                 activeColor: Colors.white,
-                value: 40,
-                min: 1,
-                max: 60,
+                value: _sliderValue,
+                min: 0,
+                inactiveColor: Colors.blue,
+                max: 100.0,
                 divisions: 2,
-                label: _sliderValue.toString(),
                 onChanged: (onchanged) {
                   print('object');
                 },
@@ -143,22 +156,29 @@ class _ControlCenterState extends State<ControlCenter> {
             ],
           ),
           SizedBox(
-            height: 30,
+            height: 20,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Icon(Icons.brightness_auto),
-              Slider(
-                activeColor: Colors.white,
-                value: 100,
-                min: 60,
-                max: 100,
-                divisions: 1,
-                label: 'Volume',
-                onChanged: (onchanged2) {
-                  print('object');
-                },
-              )
+              SliderTheme(
+                data: SliderThemeData(
+                    trackHeight: 50,
+                    overlayShape: RoundSliderOverlayShape(overlayRadius: 15),
+                    tickMarkShape:
+                        RoundSliderTickMarkShape(tickMarkRadius: 50)),
+                child: Slider(
+                    activeColor: Colors.white,
+                    value: _sliderValue,
+                    onChanged: (double b) {
+                      setState(() {
+                        _sliderValue = b;
+                      });
+                      Screen.setBrightness(b);
+                    }),
+              ),
+              SizedBox()
             ],
           )
         ],

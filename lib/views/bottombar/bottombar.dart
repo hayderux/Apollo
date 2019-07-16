@@ -7,14 +7,12 @@ import 'package:apollo/views/bottombar/drawer_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'CustomShell.dart';
+
 class MyBottomBar extends StatefulWidget {
   final List<Widget> favapps;
   final List<Widget> loadapps;
-  final EdgeInsetsGeometry margin;
-  final BorderRadiusGeometry borderRadius;
-  const MyBottomBar(
-      {Key key, this.favapps, this.loadapps, this.borderRadius, this.margin})
-      : super(key: key);
+  const MyBottomBar({Key key, this.favapps, this.loadapps}) : super(key: key);
 
   @override
   _MyBottomBarState createState() => _MyBottomBarState();
@@ -38,13 +36,11 @@ class _MyBottomBarState extends State<MyBottomBar>
   Widget build(BuildContext context) {
     return Container(
       height: 80,
-      margin: widget.margin,
+      margin: CustomShell.margin(context),
       decoration: BoxDecoration(
           color: Colors.grey.shade200.withOpacity(0.5),
           boxShadow: boxShadow,
-          /*borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15), topRight: Radius.circular(15)),*/
-          borderRadius: widget.borderRadius),
+          borderRadius: CustomShell.borderRadius(context)),
       child: Padding(
         padding: EdgeInsets.only(
           left: 20,

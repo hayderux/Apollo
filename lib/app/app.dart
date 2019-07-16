@@ -1,4 +1,4 @@
-import 'package:apollo/views/home.dart';
+import 'package:apollo/views/shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Apollo',
       theme: ThemeData(platform: TargetPlatform.iOS),
-      home: HomeView(),
+      home: Shell(),
     );
   }
 }

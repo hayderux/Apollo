@@ -9,7 +9,6 @@ void main() async {
   _setTargetPlatformForDesktop();
   runApp(MyApp());
 }
-
 void _setTargetPlatformForDesktop({TargetPlatform target}) {
   TargetPlatform targetPlatform;
   if (target != null) {
