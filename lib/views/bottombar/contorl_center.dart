@@ -1,7 +1,7 @@
 import 'package:apollo/style/CustomTheme.dart';
+import 'package:apollo/style/themelist.dart';
 import 'package:apollo/style/themes.dart';
 import 'package:apollo/style/xd.dart';
-import 'package:apollo/views/settings/themelist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
