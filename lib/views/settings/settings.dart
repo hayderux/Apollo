@@ -2,7 +2,7 @@ import 'package:apollo/style/CustomTheme.dart';
 import 'package:apollo/style/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:launcher_assist/launcher_assist.dart';
-
+import 'package:flutter/cupertino.dart';
 class SettingsView extends StatefulWidget {
   @override
   _SettingsViewState createState() => _SettingsViewState();
