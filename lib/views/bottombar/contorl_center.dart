@@ -1,8 +1,7 @@
 import 'package:apollo/style/CustomTheme.dart';
 import 'package:apollo/style/themes.dart';
 import 'package:apollo/style/xd.dart';
-import 'package:apollo/style/xd.dart' as prefix0;
-import 'package:apollo/views/settings/settings.dart';
+import 'package:apollo/views/settings/themelist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,19 +10,18 @@ import 'package:screen/screen.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 import 'package:flutter/services.dart';
 
-import 'CustomShell.dart';
+import 'colors.choose.dart';
 
 class ControlCenter extends StatefulWidget {
   @override
   _ControlCenterState createState() => _ControlCenterState();
 }
 
-class _ControlCenterState extends State<ControlCenter> {
+class _ControlCenterState extends State<ControlCenter>
+    with TickerProviderStateMixin {
   bool _isEnabled = false;
   double _sliderValue;
-  void _changeTheme(BuildContext buildContext, MyThemeKeys key) {
-    CustomTheme.instanceOf(buildContext).changeTheme(key);
-  }
+  TabController controller;
 
   Widget circleicon(
       Color color, IconData icon, Color iconcolor, VoidCallback ontap) {
@@ -73,10 +71,35 @@ class _ControlCenterState extends State<ControlCenter> {
     });
   }
 
+  changeappbarbutton() {
+    if (controller.index != 0) {
+      return IconButton(
+        icon: Icon(Icons.dashboard),
+        onPressed: () {
+          controller.animateTo(0);
+        },
+      );
+    } else {
+      IconButton(
+        icon: Icon(Icons.color_lens),
+        onPressed: () {
+          controller.animateTo(1);
+        },
+      );
+    }
+    return IconButton(
+      icon: Icon(Icons.color_lens),
+      onPressed: () {
+        controller.animateTo(1);
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     getbrightness();
+    controller = new TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
   getbrightness() async {
@@ -97,11 +120,11 @@ class _ControlCenterState extends State<ControlCenter> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          Row(
+    return Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(70),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
@@ -121,99 +144,89 @@ class _ControlCenterState extends State<ControlCenter> {
               ),
               Row(
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.color_lens),
-                    onPressed: () {
-                      _changeTheme(context, MyThemeKeys.Theme2);
-                    },
-                  ),
+                  changeappbarbutton(),
                   IconButton(
                     icon: Icon(Icons.settings),
                     onPressed: () {
                       LauncherAssist.launchApp('com.android.settings');
-                      /*Navigator.pop(context);
-                      showModalBottomSheet(
-                          elevation: 6.0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: CustomShell.borderRadius(context)),
-                          backgroundColor:
-                              Colors.grey.shade200.withOpacity(0.6),
-                          context: context,
-                          //barrierDismissible: true,
-                          builder: (buildContext) {
-                            return Padding(
-                              padding:
-                                  EdgeInsets.only(top: 20, right: 20, left: 20),
-                              child: SettingsView(),
-                            );
-                          });*/
                     },
                   ),
                 ],
               )
             ],
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              cheackwifi(),
-              circleicon(Colors.white, Icons.network_cell, Colors.black, () {}),
-              circleicon(
-                  Colors.white, FontAwesomeIcons.moon, Colors.black, () {}),
-              circleicon(Colors.white, Icons.location_on, Colors.black, () {}),
-              circleicon(
-                  Colors.white, Icons.screen_lock_rotation, Colors.black, () {})
-            ],
-          ),
-          SizedBox(
-            height: 60,
-          ),
-          Row(
-            children: <Widget>[
-              Icon(Icons.volume_up),
-              Container(
-                margin: EdgeInsets.only(left: 0, right: 0),
-                width: width(),
-                child: CupertinoSlider(
-                    activeColor: Colors.white,
-                    value: _sliderValue,
-                    onChanged: (double b) {
-                      setState(() {
-                        _sliderValue = b;
-                      });
-                      Screen.setBrightness(b);
-                    }),
+        ),
+        body: TabBarView(
+          controller: controller,
+          children: <Widget>[
+            Container(
+              child: ListView(
+                padding: EdgeInsets.only(top: 30),
+                physics: NeverScrollableScrollPhysics(),
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      cheackwifi(),
+                      circleicon(Colors.white, Icons.network_cell, Colors.black,
+                          () {}),
+                      circleicon(Colors.white, FontAwesomeIcons.moon,
+                          Colors.black, () {}),
+                      circleicon(
+                          Colors.white, Icons.location_on, Colors.black, () {}),
+                      circleicon(Colors.white, Icons.screen_lock_rotation,
+                          Colors.black, () {})
+                    ],
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.volume_up),
+                      Container(
+                        margin: EdgeInsets.only(left: 0, right: 0),
+                        width: width(),
+                        child: CupertinoSlider(
+                            activeColor: Colors.white,
+                            value: _sliderValue,
+                            onChanged: (double b) {
+                              setState(() {
+                                _sliderValue = b;
+                              });
+                              Screen.setBrightness(b);
+                            }),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Icon(Icons.brightness_auto),
+                      Container(
+                        margin: EdgeInsets.only(left: 0, right: 0),
+                        width: width(),
+                        child: CupertinoSlider(
+                            activeColor: Colors.white,
+                            value: _sliderValue,
+                            onChanged: (double b) {
+                              setState(() {
+                                _sliderValue = b;
+                              });
+                              Screen.setBrightness(b);
+                            }),
+                      ),
+                      SizedBox()
+                    ],
+                  )
+                ],
               ),
-            ],
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Icon(Icons.brightness_auto),
-              Container(
-                margin: EdgeInsets.only(left: 0, right: 0),
-                width: width(),
-                child: CupertinoSlider(
-                    activeColor: Colors.white,
-                    value: _sliderValue,
-                    onChanged: (double b) {
-                      setState(() {
-                        _sliderValue = b;
-                      });
-                      Screen.setBrightness(b);
-                    }),
-              ),
-              SizedBox()
-            ],
-          )
-        ],
-      ),
-    );
+            ),
+            ColorChoose()
+          ],
+        ));
   }
 }
