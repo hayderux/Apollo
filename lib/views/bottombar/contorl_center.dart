@@ -10,8 +10,6 @@ import 'package:screen/screen.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 import 'package:flutter/services.dart';
 
-import 'colors.choose.dart';
-
 class ControlCenter extends StatefulWidget {
   @override
   _ControlCenterState createState() => _ControlCenterState();
@@ -95,6 +93,10 @@ class _ControlCenterState extends State<ControlCenter>
     );
   }
 
+  void _changeTheme(BuildContext buildContext, MyThemeKeys key) {
+    CustomTheme.instanceOf(buildContext).changeTheme(key);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -168,14 +170,14 @@ class _ControlCenterState extends State<ControlCenter>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       cheackwifi(),
-                      circleicon(Colors.white, Icons.network_cell, Colors.black,
-                          () {}),
+                      circleicon(Theme.of(context).primaryColor,
+                          Icons.network_cell, Colors.white, () {}),
                       circleicon(Colors.white, FontAwesomeIcons.moon,
                           Colors.black, () {}),
                       circleicon(
                           Colors.white, Icons.location_on, Colors.black, () {}),
-                      circleicon(Colors.white, Icons.screen_lock_rotation,
-                          Colors.black, () {})
+                      circleicon(Theme.of(context).primaryColor,
+                          Icons.screen_lock_rotation, Colors.white, () {})
                     ],
                   ),
                   SizedBox(
@@ -225,7 +227,27 @@ class _ControlCenterState extends State<ControlCenter>
                 ],
               ),
             ),
-            ColorChoose()
+            GridView.builder(
+              padding: EdgeInsets.only(top: 30),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: 1.5,
+                  crossAxisSpacing: 2,
+                  mainAxisSpacing: 2),
+              itemCount: choosetheme.length,
+              itemBuilder: (BuildContext context, index) {
+                return InkWell(
+                  child: CircleAvatar(
+                    backgroundColor: choosetheme[index].color,
+                    maxRadius: 20,
+                  ),
+                  onTap: () {
+                    _changeTheme(context, choosetheme[index].myThemeKeys);
+                    controller.animateTo(0);
+                  },
+                );
+              },
+            )
           ],
         ));
   }
