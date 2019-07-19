@@ -11,7 +11,7 @@ void main() async {
   _setTargetPlatformForDesktop();
   runApp(CustomTheme(
     initialThemeKey: MyThemeKeys.Theme1,
-    child: MyApp(),
+    child: MyApp()
   ));
 }
 

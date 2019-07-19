@@ -1,12 +1,16 @@
 import 'package:apollo/style/CustomTheme.dart';
 import 'package:apollo/style/themes.dart';
 import 'package:apollo/style/xd.dart';
+import 'package:apollo/style/xd.dart' as prefix0;
 import 'package:apollo/views/settings/settings.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:screen/screen.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 import 'package:flutter/services.dart';
+
+import 'CustomShell.dart';
 
 class ControlCenter extends StatefulWidget {
   @override
@@ -112,11 +116,20 @@ class _ControlCenterState extends State<ControlCenter> {
                     icon: Icon(Icons.settings),
                     onPressed: () {
                       Navigator.pop(context);
-                      showDialog(
+                      showModalBottomSheet(
+                          elevation: 6.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: CustomShell.borderRadius(context)),
+                          backgroundColor:
+                              Colors.grey.shade200.withOpacity(0.6),
                           context: context,
-                          barrierDismissible: true,
+                          //barrierDismissible: true,
                           builder: (buildContext) {
-                            return SettingsView();
+                            return Padding(
+                              padding:
+                                  EdgeInsets.only(top: 20, right: 20, left: 20),
+                              child: SettingsView(),
+                            );
                           });
                     },
                   ),
@@ -151,33 +164,32 @@ class _ControlCenterState extends State<ControlCenter> {
           Row(
             children: <Widget>[
               Icon(Icons.volume_up),
-              Slider(
-                activeColor: Colors.white,
-                value: _sliderValue,
-                min: 0,
-                inactiveColor: Colors.blue,
-                max: 100.0,
-                divisions: 2,
-                onChanged: (onchanged) {
-                  print('object');
-                },
-              )
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 0),
+                width: MediaQuery.of(context).size.width / 1.3,
+                child: CupertinoSlider(
+                    activeColor: Colors.white,
+                    value: _sliderValue,
+                    onChanged: (double b) {
+                      setState(() {
+                        _sliderValue = b;
+                      });
+                      Screen.setBrightness(b);
+                    }),
+              ),
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 50,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Icon(Icons.brightness_auto),
-              SliderTheme(
-                data: SliderThemeData(
-                    trackHeight: 50,
-                    overlayShape: RoundSliderOverlayShape(overlayRadius: 15),
-                    tickMarkShape:
-                        RoundSliderTickMarkShape(tickMarkRadius: 50)),
-                child: Slider(
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 0),
+                width: MediaQuery.of(context).size.width / 1.3,
+                child: CupertinoSlider(
                     activeColor: Colors.white,
                     value: _sliderValue,
                     onChanged: (double b) {

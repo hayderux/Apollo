@@ -38,7 +38,7 @@ class _MyBottomBarState extends State<MyBottomBar>
       height: 80,
       margin: CustomShell.margin(context),
       decoration: BoxDecoration(
-          color: Colors.grey.shade200.withOpacity(0.5),
+          color: Colors.grey.shade200.withOpacity(0.4),
           boxShadow: boxShadow,
           borderRadius: CustomShell.borderRadius(context)),
       child: Padding(
@@ -63,7 +63,7 @@ class _MyBottomBarState extends State<MyBottomBar>
                               return DialogFork(
                                 alignment: Alignment.center,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
+                                    borderRadius: BorderRadius.circular(20)),
                                 backgroundColor:
                                     Colors.grey.shade200.withOpacity(0.6),
                                 elevation: 6.0,
@@ -76,7 +76,7 @@ class _MyBottomBarState extends State<MyBottomBar>
                       } else {
                         AppSheets.showAppHeightEightSheet(
                             context: context,
-                            radius: 15,
+                            radius: 20,
                             bgColor: Colors.black.withOpacity(0.6),
                             color: Colors.grey.shade200.withOpacity(0.6),
                             builder: (buildContext) {
@@ -117,7 +117,8 @@ class _MyBottomBarState extends State<MyBottomBar>
                       if (MediaQuery.of(context).size.width < 600) {
                         showModalBottomSheet(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
+                                borderRadius:
+                                    CustomShell.borderRadius(context)),
                             context: context,
                             elevation: 6.0,
                             backgroundColor:
@@ -136,7 +137,8 @@ class _MyBottomBarState extends State<MyBottomBar>
                             builder: (buildContext) {
                               return DialogFork(
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
+                                      borderRadius:
+                                          CustomShell.borderRadius(context)),
                                   alignment: Alignment.bottomRight,
                                   elevation: 6.0,
                                   backgroundColor:

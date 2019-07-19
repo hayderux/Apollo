@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class CustomShell {
   static borderRadius(context) {
     if (MediaQuery.of(context).size.width > 600) {
-      return BorderRadius.circular(15);
+      return BorderRadius.circular(20);
     } else {
       return BorderRadius.only(
-          topLeft: Radius.circular(15), topRight: Radius.circular(15));
+          topLeft: Radius.circular(20), topRight: Radius.circular(20));
     }
   }
 
@@ -19,4 +19,3 @@ class CustomShell {
     }
   }
 }
-

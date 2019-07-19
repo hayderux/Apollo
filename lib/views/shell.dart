@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:launcher_assist/launcher_assist.dart';
 
-
 class Shell extends StatefulWidget {
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -13,6 +12,7 @@ class Shell extends StatefulWidget {
 class _HomeViewState extends State<Shell> with TickerProviderStateMixin {
   var installedAppDetails;
   var wallpaper;
+
   @override
   void initState() {
     super.initState();
