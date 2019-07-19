@@ -6,6 +6,7 @@ import 'package:apollo/views/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:launcher_assist/launcher_assist.dart';
 import 'package:screen/screen.dart';
 import 'package:wifi_iot/wifi_iot.dart';
 import 'package:flutter/services.dart';
@@ -86,6 +87,14 @@ class _ControlCenterState extends State<ControlCenter> {
     });
   }
 
+  width() {
+    if (MediaQuery.of(context).size.width > 600) {
+      return MediaQuery.of(context).size.width / 2.7;
+    } else {
+      return MediaQuery.of(context).size.width / 1.3;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -113,9 +122,16 @@ class _ControlCenterState extends State<ControlCenter> {
               Row(
                 children: <Widget>[
                   IconButton(
+                    icon: Icon(Icons.color_lens),
+                    onPressed: () {
+                      _changeTheme(context, MyThemeKeys.Theme2);
+                    },
+                  ),
+                  IconButton(
                     icon: Icon(Icons.settings),
                     onPressed: () {
-                      Navigator.pop(context);
+                      LauncherAssist.launchApp('com.android.settings');
+                      /*Navigator.pop(context);
                       showModalBottomSheet(
                           elevation: 6.0,
                           shape: RoundedRectangleBorder(
@@ -130,13 +146,7 @@ class _ControlCenterState extends State<ControlCenter> {
                                   EdgeInsets.only(top: 20, right: 20, left: 20),
                               child: SettingsView(),
                             );
-                          });
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.color_lens),
-                    onPressed: () {
-                      _changeTheme(context, MyThemeKeys.Theme2);
+                          });*/
                     },
                   ),
                 ],
@@ -165,8 +175,8 @@ class _ControlCenterState extends State<ControlCenter> {
             children: <Widget>[
               Icon(Icons.volume_up),
               Container(
-                margin: EdgeInsets.only(left: 20, right: 0),
-                width: MediaQuery.of(context).size.width / 1.3,
+                margin: EdgeInsets.only(left: 0, right: 0),
+                width: width(),
                 child: CupertinoSlider(
                     activeColor: Colors.white,
                     value: _sliderValue,
@@ -187,8 +197,8 @@ class _ControlCenterState extends State<ControlCenter> {
             children: <Widget>[
               Icon(Icons.brightness_auto),
               Container(
-                margin: EdgeInsets.only(left: 20, right: 0),
-                width: MediaQuery.of(context).size.width / 1.3,
+                margin: EdgeInsets.only(left: 0, right: 0),
+                width: width(),
                 child: CupertinoSlider(
                     activeColor: Colors.white,
                     value: _sliderValue,

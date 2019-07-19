@@ -13,15 +13,15 @@ class _DrawerPageState extends State<DrawerPage> {
   girdviewbreakpoint() {
     if (MediaQuery.of(context).size.width > 600) {
       return GridView.count(
-          padding: EdgeInsets.only(top: 20),
-          crossAxisCount: 6,
+          padding: EdgeInsets.only(top: 30),
+          crossAxisCount: 8,
           childAspectRatio: 1.0,
           crossAxisSpacing: 1.4,
           mainAxisSpacing: 1.4,
           children: widget.loadapps);
     } else {
       return GridView.count(
-          padding: EdgeInsets.only(top: 20),
+          padding: EdgeInsets.only(top: 25),
           crossAxisCount: 4,
           childAspectRatio: 1.0,
           crossAxisSpacing: 1.4,
