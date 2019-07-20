@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:launcher_assist/launcher_assist.dart';
+import 'package:rubber/rubber.dart';
+
+import 'bottombar/drawer_page.dart';
 
 class Shell extends StatefulWidget {
   @override
@@ -147,19 +150,21 @@ class _HomeViewState extends State<Shell> with TickerProviderStateMixin {
           image: DecorationImage(image: loadWallpaper(), fit: BoxFit.cover),
         ),
         child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
             backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0.0,
-            ),
-            body: InkWell(
-              onLongPress: _showCustomMenu,
-              onTapDown: _storePosition,
-            ),
-            bottomNavigationBar: MyBottomBar(
+            elevation: 0.0,
+          ),
+          body: InkWell(
+            onLongPress: _showCustomMenu,
+            onTapDown: _storePosition,
+          ),
+         
+          bottomNavigationBar: MyBottomBar(
               loadapps: appWidgets,
               favapps: <Widget>[],
-            )),
+            )
+        ),
       );
     } else {
       return Container(

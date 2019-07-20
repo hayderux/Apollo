@@ -20,6 +20,8 @@ dependencies:
   bubble_tab_indicator: ^0.1.4
   flutter_xlider: ^2.5.0
   volume: ^0.1.0
+  expandable_bottom_bar: ^0.1.1
+  rubber: ^0.3.2
 
 
 dev_dependencies:

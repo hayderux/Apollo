@@ -15,7 +15,7 @@ class Drawerbar extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             boxShadow: boxShadow),
         margin: EdgeInsets.only(
-          top: 10,
+          top: 0,
         ),
         width: 350,
         child: TabBar(
@@ -33,7 +33,7 @@ class Drawerbar extends StatelessWidget {
           indicatorSize: TabBarIndicatorSize.tab,
           tabs: <Widget>[
             Tab(
-              text: 'Apps',
+              text: 'Notifications',
             ),
             Tab(
               text: 'Timeline',
