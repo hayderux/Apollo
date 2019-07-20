@@ -1,12 +1,10 @@
+import 'package:apollo/components/Fork_dialog.dart';
 import 'package:apollo/components/Vertical_divider.dart';
-import 'package:apollo/components/c_dialog.dart';
 import 'package:apollo/components/custom_sheet.dart';
 import 'package:apollo/style/xd.dart';
 import 'package:apollo/views/bottombar/contorl_center.dart';
 import 'package:apollo/views/bottombar/drawer_page.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'CustomShell.dart';
 
 class MyBottomBar extends StatefulWidget {
@@ -53,10 +51,13 @@ class _MyBottomBarState extends State<MyBottomBar>
               Row(
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.apps,size: 30,),
+                    icon: Icon(
+                      Icons.apps,
+                      size: 30,
+                    ),
                     onPressed: () {
                       if (MediaQuery.of(context).size.width > 600) {
-                        showDialog(
+                        showDialogF(
                             context: context,
                             barrierDismissible: true,
                             builder: (buildContext) {
@@ -126,7 +127,7 @@ class _MyBottomBarState extends State<MyBottomBar>
                             builder: (buildContext) {
                               return Padding(
                                 padding: EdgeInsets.only(
-                                    left: 20, right: 20, top: 20),
+                                    left: 10, right: 10, top: 20),
                                 child: ControlCenter(),
                               );
                             });
@@ -148,7 +149,7 @@ class _MyBottomBarState extends State<MyBottomBar>
                                     width: 450,
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                          left: 20, right: 20, top: 20),
+                                          left: 10, right: 10, top: 20),
                                       child: ControlCenter(),
                                     ),
                                   ));

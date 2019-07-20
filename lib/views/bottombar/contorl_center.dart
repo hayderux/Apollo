@@ -32,7 +32,6 @@ class _ControlCenterState extends State<ControlCenter>
       child: Container(
         height: 60,
         width: 60,
-        margin: EdgeInsets.only(left: 4, right: 4),
         decoration: BoxDecoration(
             color: color, shape: BoxShape.circle, boxShadow: boxShadow),
         child: Icon(
@@ -165,7 +164,7 @@ class _ControlCenterState extends State<ControlCenter>
           children: <Widget>[
             Container(
               child: ListView(
-                padding: EdgeInsets.only(top: 30),
+                padding: EdgeInsets.only(top: 30, left: 10, right: 10),
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
                   Row(
