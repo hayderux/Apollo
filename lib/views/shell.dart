@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:apollo/views/bottombar/bottombar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:launcher_assist/launcher_assist.dart';
 
 class Shell extends StatefulWidget {
@@ -12,11 +13,69 @@ class Shell extends StatefulWidget {
 class _HomeViewState extends State<Shell> with TickerProviderStateMixin {
   var installedAppDetails;
   var wallpaper;
+  var _tapPosition;
 
   @override
   void initState() {
     super.initState();
     loadNative();
+  }
+
+  void _showCustomMenu() {
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+    showMenu(
+        elevation: 6.0,
+        position: RelativeRect.fromRect(
+            _tapPosition & Size(40, 40), // smaller rect, the touch area
+            Offset.zero & overlay.size),
+        context: context,
+        items: [
+          PopupMenuItem(
+              child: InkWell(
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.wallpaper),
+                SizedBox(
+                  width: 10,
+                ),
+                Text('wallpaper'),
+                SizedBox(
+                  width: 30,
+                )
+              ],
+            ),
+          )),
+          PopupMenuItem(
+              child: InkWell(
+            child: Row(
+              children: <Widget>[
+                Icon(FontAwesomeIcons.terminal),
+                SizedBox(
+                  width: 10,
+                ),
+                Text('terminal'),
+                SizedBox(
+                  width: 30,
+                )
+              ],
+            ),
+          )),
+          PopupMenuItem(
+              child: InkWell(
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.settings),
+                SizedBox(
+                  width: 10,
+                ),
+                Text('System Settings'),
+                SizedBox(
+                  width: 30,
+                )
+              ],
+            ),
+          ))
+        ]);
   }
 
   void loadNative() async {
@@ -75,6 +134,10 @@ class _HomeViewState extends State<Shell> with TickerProviderStateMixin {
     LauncherAssist.launchApp(packageName);
   }
 
+  void _storePosition(TapDownDetails details) {
+    _tapPosition = details.globalPosition;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (installedAppDetails != null) {
@@ -88,6 +151,10 @@ class _HomeViewState extends State<Shell> with TickerProviderStateMixin {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0.0,
+            ),
+            body: InkWell(
+              onLongPress: _showCustomMenu,
+              onTapDown: _storePosition,
             ),
             bottomNavigationBar: MyBottomBar(
               loadapps: appWidgets,

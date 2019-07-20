@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
-enum MyThemeKeys { Theme1, Theme2, Theme3, Theme4, Theme5, Theme6 }
+enum MyThemeKeys {
+  Theme1,
+  Theme2,
+  Theme3,
+  Theme4,
+  Theme5,
+  Theme6,
+  Theme7,
+  Theme8
+}
 
 class Apptheme {
   static final ThemeData theme1 = ThemeData(
@@ -14,7 +23,7 @@ class Apptheme {
 
   static final ThemeData theme2 = ThemeData(
       platform: TargetPlatform.iOS,
-      primaryColor: Colors.deepOrange.shade800,
+      primaryColor: Colors.orange.shade800,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -35,7 +44,7 @@ class Apptheme {
       splashColor: Colors.transparent);
   static final ThemeData theme5 = ThemeData(
       platform: TargetPlatform.iOS,
-      primaryColor: Colors.red.shade800,
+      primaryColor: Colors.red.shade900,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -43,6 +52,20 @@ class Apptheme {
   static final ThemeData theme6 = ThemeData(
       platform: TargetPlatform.iOS,
       primaryColor: Colors.green.shade800,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      splashColor: Colors.transparent);
+  static final ThemeData theme7 = ThemeData(
+      platform: TargetPlatform.iOS,
+      primaryColor: Colors.pink.shade600,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      splashColor: Colors.transparent);
+  static final ThemeData theme8 = ThemeData(
+      platform: TargetPlatform.iOS,
+      primaryColor: Colors.cyan.shade800,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -61,6 +84,10 @@ class Apptheme {
         return theme5;
       case MyThemeKeys.Theme6:
         return theme6;
+      case MyThemeKeys.Theme7:
+        return theme7;
+      case MyThemeKeys.Theme8:
+        return theme8;
       default:
         return theme1;
     }

@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^8.4.0
+  font_awesome_flutter: ^8.5.0
   permission_handler: ^3.1.0
   cupertino_icons: ^0.1.2
   launcher_assist: ^1.1.3

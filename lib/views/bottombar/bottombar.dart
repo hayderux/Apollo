@@ -53,7 +53,7 @@ class _MyBottomBarState extends State<MyBottomBar>
               Row(
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(FontAwesomeIcons.windows),
+                    icon: Icon(Icons.apps,size: 30,),
                     onPressed: () {
                       if (MediaQuery.of(context).size.width > 600) {
                         showDialog(

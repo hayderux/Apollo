@@ -2,6 +2,7 @@ import 'package:apollo/style/CustomTheme.dart';
 import 'package:apollo/style/themelist.dart';
 import 'package:apollo/style/themes.dart';
 import 'package:apollo/style/xd.dart';
+import 'package:apollo/style/xd.dart' as prefix0;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,6 +32,7 @@ class _ControlCenterState extends State<ControlCenter>
       child: Container(
         height: 60,
         width: 60,
+        margin: EdgeInsets.only(left: 4, right: 4),
         decoration: BoxDecoration(
             color: color, shape: BoxShape.circle, boxShadow: boxShadow),
         child: Icon(
@@ -232,14 +234,18 @@ class _ControlCenterState extends State<ControlCenter>
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   childAspectRatio: 1.5,
-                  crossAxisSpacing: 2,
-                  mainAxisSpacing: 2),
+                  crossAxisSpacing: 1,
+                  mainAxisSpacing: 30),
               itemCount: choosetheme.length,
               itemBuilder: (BuildContext context, index) {
                 return InkWell(
-                  child: CircleAvatar(
-                    backgroundColor: choosetheme[index].color,
-                    maxRadius: 20,
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: choosetheme[index].color,
+                        boxShadow: prefix0.boxShadow),
                   ),
                   onTap: () {
                     _changeTheme(context, choosetheme[index].myThemeKeys);
